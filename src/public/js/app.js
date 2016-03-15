@@ -28,14 +28,14 @@
         return {
             
             groceryItems: [
-                { id: idSequence++, bought: true, itemName: 'Milk', date: '2016-03-09' },
-                { id: idSequence++, bought: true, itemName: 'Meat', date: '2016-03-09' },
-                { id: idSequence++, bought: true, itemName: 'Banana', date: '2016-03-09' },
-                { id: idSequence++, bought: true, itemName: 'Chocolates', date: '2016-03-01' },
-                { id: idSequence++, bought: true, itemName: 'Chicken wings (buffalo wings)', date: '2016-03-01' },
-                { id: idSequence++, bought: true, itemName: 'Apple', date: '2016-03-01' },  
-                { id: idSequence++, bought: true, itemName: 'Bread loaf', date: '2016-03-10' },  
-                { id: idSequence++, bought: true, itemName: 'Coca-cola', date: '2016-03-10' }
+                { id: idSequence++, bought: true, itemName: 'Milk', date: new Date('March 9, 2016 12:00:00') },
+                { id: idSequence++, bought: true, itemName: 'Meat', date: new Date('March 9, 2016 12:00:00') },
+                { id: idSequence++, bought: true, itemName: 'Banana', date: new Date('March 9, 2016 12:00:00') },
+                { id: idSequence++, bought: true, itemName: 'Chocolates', date: new Date('March 1, 2016 12:00:00') },
+                { id: idSequence++, bought: true, itemName: 'Chicken wings (buffalo wings)', date: new Date('March 1, 2016 12:00:00') },
+                { id: idSequence++, bought: true, itemName: 'Apple', date: new Date('March 1, 2016 12:00:00') },  
+                { id: idSequence++, bought: true, itemName: 'Bread loaf', date: new Date('March 10, 2016 12:00:00') },  
+                { id: idSequence++, bought: true, itemName: 'Coca-cola', date: new Date('March 10, 2016 12:00:00') }
             ],
             
             _idSequence: idSequence,
@@ -57,6 +57,14 @@
                 }
             },
             
+            // Remove the given item from the array
+            removeItem: function(item) {
+              var index = this.groceryItems.indexOf(item);
+              
+              if(index >= 0)
+                this.groceryItems.splice(index, 1);  
+            },
+            
             getItem: function(itemId) {
                 for(var index = 0; index < this.groceryItems.length; index++) {
                     var item = this.groceryItems[index];
@@ -69,6 +77,10 @@
     })
     .controller('HomeController', ['$scope', 'GroceryService', function($scope, GroceryService) {
         $scope.groceryItems = GroceryService.groceryItems;
+        
+        $scope.removeItem = function(item) {
+            GroceryService.removeItem(item);
+        };
     }])
     .controller('GroceryItemController', ['$scope', '$routeParams',
         '$location', 'GroceryService',

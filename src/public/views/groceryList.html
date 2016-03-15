@@ -3,13 +3,13 @@
         Add grocery item
     </a>
     <ul class="list-group">
-        <li ng-repeat="item in groceryItems | orderBy: 'date'" ng-cloak class="list-group-item text-center clearfix">
+        <li ng-repeat="item in groceryItems | orderBy: '-date'" ng-cloak class="list-group-item text-center clearfix">
             <button type="button" class="btn btn-sm btn-default pull-left">
                 <i class="fa fa-square-o"></i>
             </button>
             <span style="font-weight:bold">{{item.itemName | uppercase}}</span>
             
-            <button type="button" class="btn btn-sm btn-danger pull-right">
+            <button type="button" class="btn btn-sm btn-danger pull-right" ng-click="removeItem(item)">
                 <i class="fa fa-trash"></i>
             </button>
             <a href="#/itemForm/{{item.id}}" class="btn btn-sm btn-default pull-right">

@@ -1,0 +1,14 @@
+{
+  "name": "grocery-list-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Israel Valverde <israelpereiravalverde@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}

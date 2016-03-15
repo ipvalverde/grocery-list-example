@@ -1,0 +1,30 @@
+{
+  "name": "GroceryListApp",
+  "authors": [
+    "Israel Valverde <israelpereiravalverde@gmail.com>"
+  ],
+  "description": "A grocery list management app, using AngularJS",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "angularjs",
+    "rest"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.0",
+    "bootstrap": "^3.3.6",
+    "angular-route": "^1.5.0",
+    "components-font-awesome": "^4.5.0"
+  }
+}

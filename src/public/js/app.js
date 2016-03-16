@@ -19,8 +19,7 @@
             .otherwise({
                 redirectTo: '/'
             });
-    })
-    
+    })    
     .service('GroceryService', function() {
         
         var idSequence = 1;
@@ -32,10 +31,10 @@
                 { id: idSequence++, bought: true, itemName: 'Meat', date: new Date('March 9, 2016 12:00:00') },
                 { id: idSequence++, bought: true, itemName: 'Banana', date: new Date('March 9, 2016 12:00:00') },
                 { id: idSequence++, bought: true, itemName: 'Chocolates', date: new Date('March 1, 2016 12:00:00') },
-                { id: idSequence++, bought: true, itemName: 'Chicken wings (buffalo wings)', date: new Date('March 1, 2016 12:00:00') },
+                { id: idSequence++, bought: true, itemName: 'Chicken wings', date: new Date('March 1, 2016 12:00:00') },
                 { id: idSequence++, bought: true, itemName: 'Apple', date: new Date('March 1, 2016 12:00:00') },  
                 { id: idSequence++, bought: true, itemName: 'Bread loaf', date: new Date('March 10, 2016 12:00:00') },  
-                { id: idSequence++, bought: true, itemName: 'Coca-cola', date: new Date('March 10, 2016 12:00:00') }
+                { id: idSequence++, bought: true, itemName: 'Coca cola', date: new Date('March 10, 2016 12:00:00') }
             ],
             
             _idSequence: idSequence,
@@ -95,7 +94,12 @@
                 $location.path('/');
             }
         }
-    ]);
+    ])
+    
+    .directive('myGroceryItem', function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'views/directives/groceryItem.html'
+        };
+    });
 })();
-
-

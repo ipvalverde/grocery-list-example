@@ -1,0 +1,11 @@
+<button type="button" class="btn btn-sm btn-default pull-left">
+    <i class="fa fa-square-o"></i>
+</button>
+<span style="font-weight:bold">{{item.itemName | uppercase}}</span>
+
+<button type="button" class="btn btn-sm btn-danger pull-right" ng-click="removeItem(item)">
+    <i class="fa fa-trash"></i>
+</button>
+<a href="#/itemForm/{{item.id}}" class="btn btn-sm btn-default pull-right" style="margin-right: 5px">
+    <i class="fa fa-pencil-square-o"></i>
+</a>

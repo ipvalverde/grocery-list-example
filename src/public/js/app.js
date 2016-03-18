@@ -27,14 +27,14 @@
         return {
             
             groceryItems: [
-                { id: idSequence++, bought: true, itemName: 'Milk', date: new Date('March 9, 2016 12:00:00') },
-                { id: idSequence++, bought: true, itemName: 'Meat', date: new Date('March 9, 2016 12:00:00') },
-                { id: idSequence++, bought: true, itemName: 'Banana', date: new Date('March 9, 2016 12:00:00') },
+                { id: idSequence++, bought: false, itemName: 'Milk', date: new Date('March 9, 2016 12:00:00') },
+                { id: idSequence++, bought: false, itemName: 'Meat', date: new Date('March 9, 2016 12:00:00') },
+                { id: idSequence++, bought: false, itemName: 'Banana', date: new Date('March 9, 2016 12:00:00') },
                 { id: idSequence++, bought: true, itemName: 'Chocolates', date: new Date('March 1, 2016 12:00:00') },
                 { id: idSequence++, bought: true, itemName: 'Chicken wings', date: new Date('March 1, 2016 12:00:00') },
                 { id: idSequence++, bought: true, itemName: 'Apple', date: new Date('March 1, 2016 12:00:00') },  
-                { id: idSequence++, bought: true, itemName: 'Bread loaf', date: new Date('March 10, 2016 12:00:00') },  
-                { id: idSequence++, bought: true, itemName: 'Coca cola', date: new Date('March 10, 2016 12:00:00') }
+                { id: idSequence++, bought: false, itemName: 'Bread loaf', date: new Date('March 10, 2016 12:00:00') },  
+                { id: idSequence++, bought: false, itemName: 'Coca cola', date: new Date('March 10, 2016 12:00:00') }
             ],
             
             _idSequence: idSequence,
@@ -71,6 +71,10 @@
                         return item;
                 }
                 return null;
+            },
+            
+            toggleBought: function(item) {
+                item.bought = !item.bought;
             }
         };
     })
@@ -80,6 +84,10 @@
         $scope.removeItem = function(item) {
             GroceryService.removeItem(item);
         };
+        
+        $scope.toggleBought = function(item) {
+            GroceryService.toggleBought(item);
+        }
     }])
     .controller('GroceryItemController', ['$scope', '$routeParams',
         '$location', 'GroceryService',

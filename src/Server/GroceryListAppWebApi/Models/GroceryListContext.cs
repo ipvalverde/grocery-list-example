@@ -6,6 +6,8 @@ namespace GroceryListAppWebApi.Models
     {
         public GroceryListContext()
         {
+            Database.SetInitializer<GroceryListContext>(new GroceryListContextInitializer());
+
             this.Configuration.AutoDetectChangesEnabled = false;
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;

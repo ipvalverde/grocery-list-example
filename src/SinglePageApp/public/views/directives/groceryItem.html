@@ -2,7 +2,7 @@
     ng-class="item.bought ? 'btn-success' : 'btn-default'">
     <i class="fa" ng-class="item.bought ? 'fa-check-square-o' : 'fa-square-o'"></i>
 </button>
-<span style="font-weight:bold" ng-class="{'strike': item.bought}">{{item.itemName | uppercase}}</span>
+<span style="font-weight:bold" ng-class="{'strike': item.bought}">{{item.name | uppercase}}</span>
 
 <button type="button" class="btn btn-sm btn-danger pull-right" ng-click="removeItem(item)">
     <i class="fa fa-trash"></i>

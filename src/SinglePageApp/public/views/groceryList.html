@@ -3,7 +3,7 @@
         Add grocery item
     </a>
     <ul class="list-group">
-        <li ng-repeat="item in groceryItems | orderBy: '-date'" ng-cloak class="list-group-item text-center clearfix">
+        <li ng-repeat="item in groceryItems | orderBy: '-dateTimeCreated'" ng-cloak class="list-group-item text-center clearfix">
             <my-grocery-item></my-grocery-item>
         </li>
     </ul>

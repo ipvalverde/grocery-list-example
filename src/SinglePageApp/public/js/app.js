@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     
-    angular.module('groceryListApp', ['ngRoute'])
+    angular.module('groceryListApp', ['ngRoute', 'ngResource'])
     .config(function($routeProvider) {
         $routeProvider
             .when('/', {
@@ -19,34 +19,30 @@
             .otherwise({
                 redirectTo: '/'
             });
-    })    
-    .service('GroceryService', function() {
+    })
+    .factory('GroceryItem', ['$resource', function ($resource) {
+        return $resource('http://localhost:3001/api/GroceryItem/:id', {}, {
+            get: {method:'GET', params:{id:'id'}, isArray:false}
+        });
+    }])
+    .service('GroceryService', ['GroceryItem', function(GroceryItem) {
         
         var idSequence = 1;
         
         return {
             
-            groceryItems: [
-                { id: idSequence++, bought: false, itemName: 'Milk', date: new Date('March 9, 2016 12:00:00') },
-                { id: idSequence++, bought: false, itemName: 'Meat', date: new Date('March 9, 2016 12:00:00') },
-                { id: idSequence++, bought: false, itemName: 'Banana', date: new Date('March 9, 2016 12:00:00') },
-                { id: idSequence++, bought: true, itemName: 'Chocolates', date: new Date('March 1, 2016 12:00:00') },
-                { id: idSequence++, bought: true, itemName: 'Chicken wings', date: new Date('March 1, 2016 12:00:00') },
-                { id: idSequence++, bought: true, itemName: 'Apple', date: new Date('March 1, 2016 12:00:00') },  
-                { id: idSequence++, bought: false, itemName: 'Bread loaf', date: new Date('March 10, 2016 12:00:00') },  
-                { id: idSequence++, bought: false, itemName: 'Coca cola', date: new Date('March 10, 2016 12:00:00') }
-            ],
+            groceryItems: GroceryItem.query(),
             
             _idSequence: idSequence,
             
             save: function(groceryItem) {
                 
-                groceryItem.date = new Date();
+                groceryItem.dateTimeCreated = new Date();
                 
                 // Update existing item
                 if(groceryItem.id) {
                     var existingGroceryItem = this.getItem(groceryItem.id);
-                    existingGroceryItem.itemName = groceryItem.itemName;
+                    existingGroceryItem.name = groceryItem.name;
                 }
                 // create new item
                 else
@@ -77,7 +73,7 @@
                 item.bought = !item.bought;
             }
         };
-    })
+    }])
     .controller('HomeController', ['$scope', 'GroceryService', function($scope, GroceryService) {
         $scope.groceryItems = GroceryService.groceryItems;
         

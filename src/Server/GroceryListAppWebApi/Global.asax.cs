@@ -1,4 +1,6 @@
 ﻿using GroceryListAppWebApi.App_Start;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 using System;
@@ -16,6 +18,12 @@ namespace GroceryListAppWebApi
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
             this.DependencyInjectionSetup();
+
+            var formatters = GlobalConfiguration.Configuration.Formatters;
+            var jsonFormatter = formatters.JsonFormatter;
+            var settings = jsonFormatter.SerializerSettings;
+            settings.Formatting = Formatting.Indented;
+            settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
         }
 
         /// <summary>
@@ -32,6 +40,8 @@ namespace GroceryListAppWebApi
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 
             container.Verify();
+
+            GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
         }
     }
 }

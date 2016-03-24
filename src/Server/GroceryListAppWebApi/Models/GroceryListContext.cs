@@ -5,6 +5,7 @@ namespace GroceryListAppWebApi.Models
     public class GroceryListContext : DbContext
     {
         public GroceryListContext()
+            :base("PostgreConnectionString")
         {
             Database.SetInitializer<GroceryListContext>(new GroceryListContextInitializer());
 

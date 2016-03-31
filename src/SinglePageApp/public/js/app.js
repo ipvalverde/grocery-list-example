@@ -22,7 +22,8 @@
     })
     .factory('GroceryItem', ['$resource', function ($resource) {
         return $resource('http://localhost:3001/api/GroceryItem/:id', {}, {
-            get: {method:'GET', params:{id:'id'}, isArray:false}
+            get: {method:'GET', params:{id:'id'}, isArray:false},
+            update: { method:'PUT' }
         });
     }])
     .service('GroceryService', ['GroceryItem', function(GroceryItem) {
@@ -31,51 +32,48 @@
         
         return {
             
-            groceryItems: GroceryItem.query(),
+            getGroceryItems: function () {
+                return GroceryItem.query()
+            },
             
             _idSequence: idSequence,
             
             save: function(groceryItem) {
                 
-                groceryItem.dateTimeCreated = new Date();
-                
+                var result;
                 // Update existing item
                 if(groceryItem.id) {
-                    var existingGroceryItem = this.getItem(groceryItem.id);
-                    existingGroceryItem.name = groceryItem.name;
+                    result = GroceryItem.update(groceryItem);
                 }
                 // create new item
-                else
-                {
-                    groceryItem.id = this._idSequence++;
-                    this.groceryItems.push(groceryItem);
+                else {
+                    result = GroceryItem.save(groceryItem);
                 }
+                
+                console.log(result);
+                // TODO Wait until the end of request before continue
             },
             
             // Remove the given item from the array
             removeItem: function(item) {
-              var index = this.groceryItems.indexOf(item);
-              
-              if(index >= 0)
-                this.groceryItems.splice(index, 1);  
+              throw new Error('Not implemented yet');
             },
             
             getItem: function(itemId) {
-                for(var index = 0; index < this.groceryItems.length; index++) {
-                    var item = this.groceryItems[index];
-                    if(item.id == itemId)
-                        return item;
-                }
-                return null;
+                return GroceryItem.get({id: itemId});
             },
             
             toggleBought: function(item) {
                 item.bought = !item.bought;
+                var response = GroceryItem.update(item);
+                
+                console.log(result);
+                // TODO Notify if the change could not be saved.
             }
         };
     }])
     .controller('HomeController', ['$scope', 'GroceryService', function($scope, GroceryService) {
-        $scope.groceryItems = GroceryService.groceryItems;
+        $scope.groceryItems = GroceryService.getGroceryItems();
         
         $scope.removeItem = function(item) {
             GroceryService.removeItem(item);
@@ -90,7 +88,7 @@
         function($scope, $routeParams, $location, GroceryService) {
             
             if($routeParams.id) {
-                $scope.groceryItem = angular.copy(GroceryService.getItem($routeParams.id));
+                $scope.groceryItem = GroceryService.getItem($routeParams.id);
             }
             
             $scope.save = function() {

@@ -158,6 +158,8 @@
     <Compile Include="App_Start\DependenciesRegistration.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\GroceryItemController.cs" />
+    <Compile Include="DTO\GroceryItemDto.cs" />
+    <Compile Include="Extensions\DtoExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -167,6 +169,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IGroceryItemRepository.cs" />
     <Compile Include="Repositories\GroceryItemRepository.cs" />
+    <Compile Include="Resources\MessageResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MessageResource.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\ValidationResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -191,6 +198,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\MessageResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MessageResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\ValidationResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ValidationResource.Designer.cs</LastGenOutput>

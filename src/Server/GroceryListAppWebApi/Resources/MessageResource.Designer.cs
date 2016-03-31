@@ -22,14 +22,14 @@ namespace GroceryListAppWebApi.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ValidationResource {
+    internal class MessageResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ValidationResource() {
+        internal MessageResource() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace GroceryListAppWebApi.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GroceryListAppWebApi.Resources.ValidationResource", typeof(ValidationResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GroceryListAppWebApi.Resources.MessageResource", typeof(MessageResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,11 @@ namespace GroceryListAppWebApi.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The grocery item name is invalid..
+        ///   Looks up a localized string similar to The grocery item was saved successfully.
         /// </summary>
-        internal static string GroceryItemNameInvalid {
+        internal static string GroceryItemSuccessfullySaved {
             get {
-                return ResourceManager.GetString("GroceryItemNameInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The grocery item name is too long..
-        /// </summary>
-        internal static string GroceryItemNameTooLong {
-            get {
-                return ResourceManager.GetString("GroceryItemNameTooLong", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The grocery item name is too short..
-        /// </summary>
-        internal static string GroceryItemNameTooShort {
-            get {
-                return ResourceManager.GetString("GroceryItemNameTooShort", resourceCulture);
+                return ResourceManager.GetString("GroceryItemSuccessfullySaved", resourceCulture);
             }
         }
     }

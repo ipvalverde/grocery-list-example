@@ -28,15 +28,11 @@
     }])
     .service('GroceryService', ['GroceryItem', function(GroceryItem) {
         
-        var idSequence = 1;
-        
         return {
             
             getGroceryItems: function () {
                 return GroceryItem.query()
             },
-            
-            _idSequence: idSequence,
             
             save: function(groceryItem) {
                 
@@ -50,13 +46,12 @@
                     result = GroceryItem.save(groceryItem);
                 }
                 
-                console.log(result);
-                // TODO Wait until the end of request before continue
+                return result;
             },
             
             // Remove the given item from the array
             removeItem: function(item) {
-              throw new Error('Not implemented yet');
+              return GroceryItem.delete({id: item.id});
             },
             
             getItem: function(itemId) {
@@ -65,10 +60,7 @@
             
             toggleBought: function(item) {
                 item.bought = !item.bought;
-                var response = GroceryItem.update(item);
-                
-                console.log(result);
-                // TODO Notify if the change could not be saved.
+                return GroceryItem.update(item);
             }
         };
     }])
@@ -76,7 +68,11 @@
         $scope.groceryItems = GroceryService.getGroceryItems();
         
         $scope.removeItem = function(item) {
-            GroceryService.removeItem(item);
+            item.disableButtons = true;
+            var request = GroceryService.removeItem(item);
+            request.$promise.then(function (resp) {
+                $scope.groceryItems = GroceryService.getGroceryItems();
+            });
         };
         
         $scope.toggleBought = function(item) {
@@ -92,8 +88,34 @@
             }
             
             $scope.save = function() {
-                GroceryService.save($scope.groceryItem);
-                $location.path('/');
+                $scope.disableButtons = true;
+                $scope.errors = null;
+                $scope.invalidFields = null;
+                var request = GroceryService.save($scope.groceryItem);
+                request.$promise.then(function (resp) {
+                    console.log(resp);
+                    
+                    if(resp.success) {
+                        $location.path('/');
+                    }
+                    else {
+                        var errors = [];
+                        var invalidFields = [];
+                        if(resp.errors) {
+                            angular.forEach(resp.errors, function(value, key) {
+                                angular.forEach(value, function(errorMessage) {
+                                   errors.push(errorMessage); 
+                                });
+                                
+                                invalidFields.push(key);
+                            });
+                        }
+                        $scope.errors = errors;
+                        $scope.invalidFields = invalidFields;
+                        
+                        $scope.disableButtons = false;
+                    }
+                });
             }
         }
     ])

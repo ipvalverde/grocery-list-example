@@ -72,5 +72,14 @@ namespace GroceryListAppWebApi.Services
             this._groceryItemRepository.Update(groceryItem);
             this._groceryItemRepository.SaveChanges();
         }
+
+        /// <summary>
+        /// Delete the grocery item with the given id.
+        /// </summary>
+        public void Delete(long id)
+        {
+            this._groceryItemRepository.Delete(id);
+            this._groceryItemRepository.SaveChanges();
+        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using GroceryListAppWebApi.DTO;
 using GroceryListAppWebApi.Resources;
 using GroceryListAppWebApi.Services;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -48,6 +47,7 @@ namespace GroceryListAppWebApi.Controllers
                 {
                     Success = false,
                     Errors = this.ModelState.Where(kv => kv.Value.Errors.Any())
+                        .ToDictionary(kv => kv.Key, kv => kv.Value.Errors.Select(e => e.ErrorMessage))
                 };
             }
 
@@ -73,6 +73,7 @@ namespace GroceryListAppWebApi.Controllers
                 {
                     Success = false,
                     Errors = this.ModelState.Where(kv => kv.Value.Errors.Any())
+                        .ToDictionary(kv => kv.Key, kv => kv.Value.Errors.Select(e => e.ErrorMessage))
                 };
             }
 
@@ -80,9 +81,10 @@ namespace GroceryListAppWebApi.Controllers
         }
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(long id)
         {
-            throw new NotImplementedException("This action is not implemented yet.");
+            this._groceryItemService.Delete(id);
+            return Ok();
         }
     }
 }

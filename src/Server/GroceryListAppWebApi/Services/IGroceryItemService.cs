@@ -29,5 +29,10 @@ namespace GroceryListAppWebApi.Services
         /// <exception cref="ArgumentException">Thrown if the given groceryItemDto instance does not have value for Id property.</exception>
         /// <exception cref="ObjectNotFoundException">Thrown if no grocery item can be found with the given Id.</exception>
         void Update(GroceryItemDto groceryItemDto);
+
+        /// <summary>
+        /// Delete the grocery item with the given id.
+        /// </summary>
+        void Delete(long id);
     }
 }
